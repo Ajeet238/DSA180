@@ -14,6 +14,7 @@ public static ListNode middleNode(ListNode head) {
 	        }
 	        return slow;
 	    }
+
 public static ListNode takeInputLinkedList() {
 		
 		Scanner sc = new Scanner(System.in);
