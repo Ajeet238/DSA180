@@ -1,21 +1,25 @@
-package LinkedList;
+package linkedList;
 
 import java.util.Scanner;
 
-public class MiddleOfLinkedList {
+public class DeleteDuplicatesFromSortedList {
 	
-public static ListNode middleNode(ListNode head) {
-	        ListNode slow = head;
-	        ListNode fast = head;
+	  public static ListNode deleteDuplicates(ListNode head) {
+	        ListNode temp = head;
+	       
 
-	        while(fast!=null && fast.next != null){
-	            fast = fast.next.next;
-	            slow = slow.next;
+	        while(temp != null && temp.next != null){
+	            
+	                if(temp.val != temp.next.val){
+	                   
+	                    temp = temp.next;
+	                }else{
+	                    temp.next = temp.next.next;
+	                }
 	        }
-	        return slow;
+	        return head;
 	    }
-
-public static ListNode takeInputLinkedList() {
+	public static ListNode takeInputLinkedList() {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -47,7 +51,7 @@ public static ListNode takeInputLinkedList() {
 	public static void main(String[] args) {
 
 		ListNode headInput = takeInputLinkedList();
-		ListNode middleNode = middleNode(headInput);
-		printLinkedList(middleNode);
+		ListNode reverseList = deleteDuplicates(headInput);
+		printLinkedList(reverseList);
 	}
 }

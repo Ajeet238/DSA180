@@ -1,30 +1,33 @@
-package LinkedList;
+package linkedList;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-// https://leetcode.com/problems/intersection-of-two-linked-lists/
-
-public class InterSectionOfLinkedListUsingHashMap {
-	   public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-	        HashMap<ListNode, Integer> hm = new HashMap<>();
+public class InterSectionOfLinkedListUsingPointerNode {
+	
+	 public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 	        ListNode tempA = headA;
 	        ListNode tempB = headB;
-	   
 
-	        while(tempA != null){
-	            hm.put(tempA, tempA.val);
-	            tempA = tempA.next;
-	        }
-	        while(tempB != null){
-	            if(hm.containsKey(tempB)){
-	                return tempB;
-	            }else{
-	                hm.put(tempB,tempB.val);
-	                tempB = tempB.next;
+	        while(tempA != null && tempB != null){
+	           
+	            if(tempA == tempB){
+	                return tempA;
 	            }
-	        } 
-	        return null;       
+	            if(tempA.next == null && tempB.next == null){
+	                return null;
+	            }
+	            if(tempA.next == null){
+	                tempA = headB;
+	            }
+	            if(tempB.next == null){
+	                tempB = headA;
+	            }            
+	            tempA = tempA.next;
+	            tempB = tempB.next;
+	        }
+	       
+	      return null;  
 	    }
 	public static ListNode takeInputLinkedList() {
 		

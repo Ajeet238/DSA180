@@ -1,57 +1,66 @@
-package LinkedList;
+package linkedList;
 
 import java.util.Scanner;
+import java.util.Stack;
 
-public class ReverseLinkedListWithoutStack {
+public class ReverseLinkedListUsingStack {
 
+// reverse linked linkedlist
+	
 	public static ListNode reverseList(ListNode head) {
 
-		if (head == null) {
+		ListNode temp = head;
+		if (head == null)
 			return null;
+		if (temp.next == null) {
+			return head;
 		}
-		// if we use below then linklist will get reversed but last node will not point
-		// to null so
-		// while printing linkedlist, we will trap in loop
-		// ListNode current = head.next;
-		// ListNode prev = head;
+		Stack<Integer> st = new Stack<>();
 
-		ListNode current = head;
-		ListNode prev = null;
-
-		while (current != null) {
-
-			ListNode temp1 = current.next;
-			ListNode temp2 = current;
-			current.next = prev;
-			current = temp1;
-			prev = temp2;
-
+		while (temp != null) {
+			st.push(temp.val);
+			temp = temp.next;
 		}
-		head = prev;
+
+		if (st.size() == 1) {
+			return head;
+		}
+		ListNode newNode = new ListNode();
+
+		newNode = head;
+		newNode.val = st.pop();
+
+		ListNode temp2 = newNode;
+
+		while (st.size() != 0) {
+			ListNode newTempNode = new ListNode();
+			temp2.next = newTempNode;
+			temp2.next.val = st.pop();
+			temp2 = newTempNode;
+		}
 		return head;
 
 	}
-
+	// take linkedlist input from user 
 	public static ListNode takeInputLinkedList() {
-
+		
 		Scanner sc = new Scanner(System.in);
-
+		
 		System.out.println("Enter the size of linked list ");
 		int size = sc.nextInt();
-
+		
 		System.out.println("Enter the element of linked list ");
-
+		
 		ListNode head = new ListNode(sc.nextInt());
 		ListNode currentNode = head;
-
-		for (int i = 1; i < size; i++) {
+		
+		for(int i=1; i<size; i++) {
 			currentNode.next = new ListNode(sc.nextInt());
-			currentNode = currentNode.next;
+			currentNode = currentNode.next;			
 		}
 		return head;
-
+		
 	}
-
 	// print linked list
 	public static void printLinkedList(ListNode head) {
 		ListNode current = head;
@@ -61,12 +70,11 @@ public class ReverseLinkedListWithoutStack {
 		}
 		System.out.println();
 	}
-
+		
 	public static void main(String[] args) {
+
 		ListNode headInput = takeInputLinkedList();
 		ListNode reverseList = reverseList(headInput);
 		printLinkedList(reverseList);
-
 	}
-
 }
